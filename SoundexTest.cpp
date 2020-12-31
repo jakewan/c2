@@ -1,20 +1,9 @@
-#include <string>
-
-class Soundex {
-   public:
-   std::string encode(const std::string& word) {
-      return zeroPad(word);
-   }
-   private:
-   std::string zeroPad(const std::string& word) {
-      return word + "000";
-   }
-};
-
 #include "gmock/gmock.h"
-using ::testing::Eq;
+#include "Soundex.h"
 
-class SoundexEncoding: public testing::Test {
+using namespace testing;
+
+class SoundexEncoding: public Test {
    public:
    Soundex soundex;
 };
