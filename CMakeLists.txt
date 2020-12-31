@@ -5,7 +5,9 @@ include_directories(
    $ENV{GOOGLETEST_HOME}/googletest/include
    $ENV{GOOGLETEST_HOME}/googlemock/include
 )
-link_directories($ENV{GOOGLETEST_HOME}/mybuild $ENV{GOOGLETEST_HOME}/gtest/mybuild)
+link_directories(
+   $ENV{GOOGLETEST_BUILD}/lib
+)
 add_definitions(-std=c++0x)
 set(CMAKE_CXX_FLAGS "${CMAXE_CXX_FLAGS} -Wall")
 
