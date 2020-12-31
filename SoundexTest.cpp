@@ -3,22 +3,25 @@
 
 using namespace testing;
 
-class SoundexEncoding: public Test {
-   public:
+class SoundexEncoding : public Test
+{
+public:
    Soundex soundex;
 };
 
-TEST_F(SoundexEncoding, RetainsSoleLetterOfOneLetterWord) {
-   auto encoded = soundex.encode("A");
-   ASSERT_THAT(encoded, Eq("A000"));
+TEST_F(SoundexEncoding, RetainsSoleLetterOfOneLetterWord)
+{
+   ASSERT_THAT(soundex.encode("A"), Eq("A000"));
 }
 
-TEST_F(SoundexEncoding, PadsWithZerosToEnsureThreeDigits) {
-   auto encoded = soundex.encode("I");
-   ASSERT_THAT(encoded, Eq("I000"));
+TEST_F(SoundexEncoding, PadsWithZerosToEnsureThreeDigits)
+{
+   ASSERT_THAT(soundex.encode("I"), Eq("I000"));
 }
 
-TEST_F(SoundexEncoding, ReplacesConsonantsWithAppropriateDigits) {
-   auto encoded = soundex.encode("Ab");
-   ASSERT_THAT(encoded, Eq("A100"));
+TEST_F(SoundexEncoding, ReplacesConsonantsWithAppropriateDigits)
+{
+   EXPECT_THAT(soundex.encode("Ab"), Eq("A100"));
+   EXPECT_THAT(soundex.encode("Ac"), Eq("A200"));
+   EXPECT_THAT(soundex.encode("Ad"), Eq("A300"));
 }
