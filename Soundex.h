@@ -9,23 +9,32 @@ class Soundex
 public:
     std::string encode(const std::string &word) const
     {
-        return zeroPad(head(word) + encodedDigits(word));
+        return zeroPad(head(word) + encodedDigits(tail(word)));
     }
 
 private:
     static const size_t MaxCodeLength{4};
+
     std::string head(const std::string &word) const
     {
         return word.substr(0, 1);
     }
+
+    std::string tail(const std::string &word) const
+    {
+        return word.substr(1);
+    }
+
     std::string encodedDigits(const std::string &word) const
     {
-        if (word.length() > 1)
+        std::string encoding;
+        for (auto letter : word)
         {
-            return encodedDigit(word[1]);
+            encoding += encodedDigit(letter);
         }
-        return "";
+        return encoding;
     }
+
     std::string encodedDigit(char letter) const
     {
         const std::unordered_map<char, std::string> encodings{
@@ -50,6 +59,7 @@ private:
         auto it = encodings.find(letter);
         return it == encodings.end() ? "" : it->second;
     }
+
     std::string zeroPad(const std::string &word) const
     {
         auto zerosNeeded = MaxCodeLength - word.length();
