@@ -21,9 +21,13 @@ private:
     {
         if (word.length() > 1)
         {
-            return "1";
+            return encodedDigit();
         }
         return "";
+    }
+    std::string encodedDigit() const
+    {
+        return "1";
     }
     std::string zeroPad(const std::string &word) const
     {
