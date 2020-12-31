@@ -1,7 +1,16 @@
-class Soundex {};
+#include <string>
 
-#include "gmock/gmock.h"    //<label id="code.include"/>
+class Soundex {
+   public:
+   std::string encode(const std::string& word) {
+      return "A";
+   }
+};
 
-TEST(SoundexEncoding, RetainsSoleLetterOfOneLetterWord) { //<label id="code.test"/>
-   Soundex soundex;   //<label id="code.construct"/>
+#include "gmock/gmock.h"
+
+TEST(SoundexEncoding, RetainsSoleLetterOfOneLetterWord) {
+   Soundex soundex;
+   auto encoded = soundex.encode("A");
+   ASSERT_THAT(encoded, testing::Eq("A"));
 }
