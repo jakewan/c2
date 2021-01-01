@@ -43,3 +43,11 @@ TEST_F(SoundexEncoding, IgnoresVowelLikeLetters)
 {
    ASSERT_THAT(soundex.encode("Baeiouhycdl"), Eq("B234"));
 }
+
+TEST_F(SoundexEncoding, CombinesDuplicateEncodings)
+{
+   // b encodes to the same digit as f
+   // c encodes to the same digit as g
+   // d encodes to the same digit as t
+   ASSERT_THAT(soundex.encode("Abfcgdt"), Eq("A123"));
+}

@@ -34,7 +34,10 @@ private:
             {
                 break;
             }
-            encoding += encodedDigit(letter);
+            if (encodedDigit(letter) != lastDigit(encoding))
+            {
+                encoding += encodedDigit(letter);
+            }
         }
         return encoding;
     }
@@ -73,6 +76,15 @@ private:
     {
         auto zerosNeeded = MaxCodeLength - word.length();
         return word + std::string(zerosNeeded, '0');
+    }
+
+    std::string lastDigit(const std::string &encoding) const
+    {
+        if (encoding.empty())
+        {
+            return "";
+        }
+        return std::string(1, encoding.back());
     }
 };
 
