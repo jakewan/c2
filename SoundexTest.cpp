@@ -61,3 +61,8 @@ TEST_F(SoundexEncoding, IngoresCaseWhenEncodingConsonants)
 {
    ASSERT_THAT(soundex.encode("BCDL"), Eq(soundex.encode("bcdl")));
 }
+
+TEST_F(SoundexEncoding, CombinesDuplicateCodesWhen2ndLetterDuplicatesThe1st)
+{
+   ASSERT_THAT(soundex.encode("Bbcd"), Eq("B230"));
+}
