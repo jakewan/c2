@@ -41,7 +41,7 @@ TEST_F(SoundexEncoding, LimitsLengthToFourCharacters)
 
 TEST_F(SoundexEncoding, IgnoresVowelLikeLetters)
 {
-   ASSERT_THAT(soundex.encode("Baeiouhycdl"), Eq("B234"));
+   ASSERT_THAT(soundex.encode("BaAeiEoIuOhUycHdYl"), Eq("B234"));
 }
 
 TEST_F(SoundexEncoding, CombinesDuplicateEncodings)
@@ -50,4 +50,9 @@ TEST_F(SoundexEncoding, CombinesDuplicateEncodings)
    // c encodes to the same digit as g
    // d encodes to the same digit as t
    ASSERT_THAT(soundex.encode("Abfcgdt"), Eq("A123"));
+}
+
+TEST_F(SoundexEncoding, FirstLetterTreatedAsUpperCase)
+{
+   ASSERT_THAT(soundex.encode("abcd"), StartsWith("A"));
 }

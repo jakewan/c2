@@ -9,11 +9,17 @@ class Soundex
 public:
     std::string encode(const std::string &word) const
     {
-        return zeroPad(head(word) + encodedDigits(tail(word)));
+        return zeroPad(upperFont(head(word)) + encodedDigits(tail(word)));
     }
 
 private:
     static const size_t MaxCodeLength{4};
+    const std::string NotADigit{"*"};
+
+    std::string upperFont(const std::string &inStr) const
+    {
+        return std::string(1, std::toupper(static_cast<unsigned char>(inStr.front())));
+    }
 
     std::string head(const std::string &word) const
     {
@@ -34,7 +40,8 @@ private:
             {
                 break;
             }
-            if (encodedDigit(letter) != lastDigit(encoding))
+            auto digit = encodedDigit(letter);
+            if (digit != NotADigit && digit != lastDigit(encoding))
             {
                 encoding += encodedDigit(letter);
             }
@@ -69,7 +76,7 @@ private:
             {'n', "5"},
             {'r', "6"}};
         auto it = encodings.find(letter);
-        return it == encodings.end() ? "" : it->second;
+        return it == encodings.end() ? NotADigit : it->second;
     }
 
     std::string zeroPad(const std::string &word) const
@@ -82,7 +89,7 @@ private:
     {
         if (encoding.empty())
         {
-            return "";
+            return NotADigit;
         }
         return std::string(1, encoding.back());
     }
