@@ -56,3 +56,8 @@ TEST_F(SoundexEncoding, FirstLetterTreatedAsUpperCase)
 {
    ASSERT_THAT(soundex.encode("abcd"), StartsWith("A"));
 }
+
+TEST_F(SoundexEncoding, IngoresCaseWhenEncodingConsonants)
+{
+   ASSERT_THAT(soundex.encode("BCDL"), Eq(soundex.encode("bcdl")));
+}

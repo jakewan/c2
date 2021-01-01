@@ -75,8 +75,13 @@ private:
             {'m', "5"},
             {'n', "5"},
             {'r', "6"}};
-        auto it = encodings.find(letter);
+        auto it = encodings.find(lower(letter));
         return it == encodings.end() ? NotADigit : it->second;
+    }
+
+    char lower(char c) const
+    {
+        return std::tolower(static_cast<unsigned char>(c));
     }
 
     std::string zeroPad(const std::string &word) const
