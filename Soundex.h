@@ -30,6 +30,10 @@ private:
         std::string encoding;
         for (auto letter : word)
         {
+            if (encoding.length() == MaxCodeLength - 1)
+            {
+                break;
+            }
             encoding += encodedDigit(letter);
         }
         return encoding;
