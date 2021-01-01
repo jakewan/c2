@@ -52,11 +52,19 @@ private:
             {
                 break;
             }
-            auto digit = encodedDigit(letter);
-            if (digit != NotADigit && digit != lastDigit(encoding))
+            else
             {
-                encoding += digit;
+                encodeLetter(encoding, letter);
             }
+        }
+    }
+
+    void encodeLetter(std::string &encoding, char letter) const
+    {
+        auto digit = encodedDigit(letter);
+        if (digit != NotADigit && digit != lastDigit(encoding))
+        {
+            encoding += digit;
         }
     }
 
